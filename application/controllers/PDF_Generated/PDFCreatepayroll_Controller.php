@@ -96,5 +96,61 @@ class PDFCreatepayroll_Controller extends CI_Controller {
 
             $filename = $SalesRep_name.' '.'payroll.pdf';
             $pdf->Output('D', $filename);
+
+            $this->load->library('phpmailer_lib');
+            $mail = $this->phpmailer_lib->load();
+            
+            $mail->isSMTP();
+            $mail->Host     = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ellosomarlon47@gmail.com';
+            $mail->Password = 'ogaxhvnpnnbekhpl';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port     = 465;
+            
+            $mail->setFrom('ellosomarlon47@gmail.com', 'Payroll Notification');
+            $mail->addAddress('slsuresearcher@gmail.com');
+            $mail->Subject = 'Generated Payroll '.$SalesRep_name;
+            $mail->isHTML(true);
+            $mailContent = "
+                    <table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>
+                        <tr>
+                          <td align='center' style='padding:0;'>
+                            <table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>
+                              <tr>
+                                <td align='center' style='padding:40px 0 30px 0;background:#47ac60;'>
+                                    <h2 style='color: #ffffff;font-family:Arial,sans-serif;'>Online Generated Payroll</h2>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style='padding:36px 30px 42px 30px;'>
+                                  <table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>
+                                    <tr>
+                                      <td style='padding:0 0 36px 0;color:#153643;'>
+                                        <p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>
+                                            <strong>Dear HR Admin:</strong><br /><br />
+                                            Payroll was already generated for".$SalesRep_name.".
+                                        </p>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>";
+            $mail->Body = $mailContent;
+            if(!$mail->send()){
+                
+            } else {
+               
+            }
+            // redirect(base_url( 'UserProposals.aspx' ));
+            // $this->session->set_flashdata('error_msg', 'Failed to Research Account');
+            
     }
+         
+        
+ 
 }
