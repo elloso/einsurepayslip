@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/main.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/all.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/datatables/jquery.dataTables.min.css"'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/datatables/buttons.dataTables.min.css'); ?>">
 <style>
     ::placeholder {
         font-style: italic;
@@ -18,7 +20,7 @@
 <body>
 <header id="header" class="header d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="<?php echo base_url('dashboard'); ?>" class="logo d-flex align-items-center">
+      <a href="<?php echo base_url('dashboard'); ?>" class="logo d-flex align-items-justify">
         <h1>Onlineinsure Payroll System</h1>
       </a>
       <nav id="navbar" class="navbar">
@@ -29,13 +31,21 @@
               Salesrep
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Addsalesrep">Add Salesrep Profile</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Addsalesrep" style="cursor: pointer;">Add Salesrep Profile</a></li>
               <li><a class="dropdown-item" href="<?php echo base_url('add-salesrep'); ?>">Salesrep Profile</a></li>
             </ul>
           </li>
           <li><a href="<?php echo base_url('view-payroll'); ?>"><i class="fa-solid fa-pencil me-1"></i>Create Payroll</a></li>
           <li><a href="#"><i class="fa-solid fa-file-lines me-1"></i>PDFs</a></li>
-          <li><a href="<?php echo base_url('logout-account'); ?>"><i class="fa-solid fa-right-from-bracket me-1"></i>Logout</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-tools me-1"></i>Settings
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="<?php echo base_url('accountsettings'); ?>">Account Settings<i class="fa-solid fa-user"></i></a></li>
+                <li><a href="<?php echo base_url('logout-account'); ?>">Logout Account<i class="fa-solid fa-right-from-bracket"></i></a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -52,8 +62,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-12 col-xl-12 mb-3">
-                            <input type="text" id="txtform_fullname" class="form-control" name="txtforms_fullname" placeholder="Enter Sales Representative (Fullname)" required>
+                        <div class="col-lg-12 col-xl-12">
+                            <input type="text" id="txtforms_fullname" class="form-control" name="txtforms_fullname" placeholder="Sales Representative (FirstName and LastName)" required>
+                        </div>
+                        <div class="mb-3">
+                            <small><div id="fullname_validate"></div></small>
                         </div>
                         <div class="col-lg-12 col-xl-12 mb-3">
                             <input type="number" style="text-align: center;" class="form-control" name="txtforms_commission" placeholder="Enter Commission Percentage" step="0.00" max="100" id="percentage" required>
@@ -72,25 +85,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" id="proceedButton" class="btn btn-primary">Add</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<script>
-    document.getElementById('percentage').addEventListener('input', function() {
-        var value = parseFloat(this.value);
-        if (isNaN(value) || value < 0 || value > 100) {
-            this.value = '';
-        }
-    });
-</script>  
-<script>
-    document.getElementById('taxpercentage').addEventListener('input', function() {
-        var value = parseFloat(this.value);
-        if (isNaN(value) || value < 0 || value > 100) {
-            this.value = '';
-        }
-    });
-</script>  

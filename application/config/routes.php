@@ -55,14 +55,34 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //Post
+$route['accountsettings'] = 'Post_Controller/accountlist';
 $route['dashboard'] = 'Post_Controller/dashboardforms';
 $route['add-salesrep'] = 'Post_Controller/new_salesrep';
 $route['view-payroll'] = 'Post_Controller/create_payrollforms';
 
 //Function
+$route['save-newuser'] = 'Function_Controller/save_user';
 $route['authenticate-account'] = 'Function_Controller/function_authenticate';
+$route['update-account'] = 'Function_Controller/function_updateuseraccount';
+$route['deleteuseraccount/(:any)'] = 'Function_Controller/function_deleteduseraccount/$1';
 $route['submit-salesrep'] = 'Function_Controller/function_newsalesrep';
+$route['update-salesrep'] = 'Function_Controller/function_updatesalesrep';
+$route['deletesalesrepuser/(:any)'] = 'Function_Controller/function_deletedatesalesrep/$1';
 $route['logout-account'] = 'Function_Controller/logout';
+
+//AJAX Function
+$route['validate-fullname'] = 'Function_Controller/check_salesrep_exists';
+$route['get-bonusbyrepname'] = 'Function_Controller/fetch_bonus';
+
+//AJAX Post
+$route['show-salesrepdata'] = 'Post_Controller/fetch_data_salesrep';
+$route['show-useraccountdata'] = 'Post_Controller/fetch_data_useraccount';
+
+//FPDF
+$route['print-payrollSystem'] = 'PDF_Generated/PDFCreatepayroll_Controller/Payroll_pdf';
+
+
+
 
 
 

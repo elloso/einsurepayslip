@@ -17,8 +17,8 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="border-radius: 20px;">
-              <div class="brand-logo">
-                <img src="<?php echo base_url('assets/img/eliteinsure_logo.png'); ?>" alt="logo">
+              <div class="brand-logo" style="margin-left: 5rem;">
+                  <img src="<?php echo base_url('assets/img/newlogo.png'); ?>" alt="logo">
               </div>
               <h2 class="ml-4">Payroll Software</h2>
               <form action="<?php echo base_url('authenticate-account'); ?>" method="POST" class="pt-3">
